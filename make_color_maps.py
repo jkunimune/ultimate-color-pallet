@@ -8,10 +8,10 @@ import numpy as np
 from math import sin, cos
 
 
-STARTING_HUE = 0
+STARTING_HUE = 10
 NUM_HUES = 9
-MAX_CHROMA = 53
-MAX_LIGHTNESS = 70
+MAX_CHROMA = 40
+MAX_LIGHTNESS = 80
 
 def define_polar_color(hue, chroma, lightness) -> tuple[int, int, int]:
 	red, green, blue = cspace_convert((lightness, chroma, hue), "JCh", "sRGB1")
