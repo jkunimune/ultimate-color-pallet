@@ -2,16 +2,16 @@
 
 # generate a set of several perceptually uniform black-to-color maps that go well together
 
-from colorspacious import cspace_convert
 import matplotlib.pyplot as plt
 import numpy as np
-from math import sin, cos
-
+from colorspacious import cspace_convert
 
 STARTING_HUE = 10
 NUM_HUES = 9
 MAX_CHROMA = 40
 MAX_LIGHTNESS = 80
+
+COLOR_NAMES = ["red", "orange", "yellow", "green", "aqua", "cyan", "blue", "violet", "pink"]
 
 def define_polar_color(hue, chroma, lightness) -> tuple[int, int, int]:
 	red, green, blue = cspace_convert((lightness, chroma, hue), "JCh", "sRGB1")
@@ -41,7 +41,8 @@ for i, hue in enumerate(np.linspace(0, 360, NUM_HUES, endpoint=False) + STARTING
 		maps[i, j, :] = [red, green, blue]
 
 		plt.scatter(lightness, hue, c=[(red, green, blue)])
+	plt.text(0, hue, COLOR_NAMES[i])
 
-	np.savetxt(f"cmap_{hue:.0f}.csv", maps[i, :, :], "%.3f")
+	np.savetxt(f"cmap_{COLOR_NAMES[i]}s.csv", maps[i, :, :], "%.3f")
 
 plt.show()
